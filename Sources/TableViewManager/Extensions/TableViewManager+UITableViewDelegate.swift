@@ -191,4 +191,11 @@ extension TableViewManager: UITableViewDelegate {
     // MARK: - Focus
     // UIKit on tvOS provides the Focus Engine, which controls focus movement and handles interaction with the new Siri Remote.
     // This engine is not usable on iOS. In this reason it's not necessary to implement focus-handling methods on RSBTableViewMananger.
+    
+    // MARK: - Context
+    
+    @available(iOS 13.0, *)
+    public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        delegate?.tableView(tableView, contextMenuConfigurationForRowAt: indexPath, point: point)
+    }
 }

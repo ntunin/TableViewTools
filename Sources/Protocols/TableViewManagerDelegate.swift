@@ -43,6 +43,21 @@ public protocol TableViewManagerDelegate: class {
     ///   - index: An index number identifying a section title in the array returned by sectionIndexTitles(for:).
     /// - Returns: An index number identifying a section.
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int
+    
+     /// Called when the interaction begins.
+     ///
+     /// - Parameters:
+     ///  - tableView: This UITableView.
+     ///  - indexPath : IndexPath of the row for which a configuration is being requested.
+     ///  - point : Location of the interaction in the table view's coordinate space
+     ///
+     /// - Returns: A UIContextMenuConfiguration describing the menu to be presented. Return nil to prevent the interaction from beginning.
+     ///         Returning an empty configuration causes the interaction to begin then fail with a cancellation effect. You might use this
+     ///         to indicate to users that it's possible for a menu to be presented from this element, but that there are no actions to
+     ///         present at this particular time.
+     ///
+    @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
 }
 
 public extension TableViewManagerDelegate {
@@ -56,4 +71,7 @@ public extension TableViewManagerDelegate {
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? { return nil }
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int { return 0 }
+    
+   @available(iOS 13.0, *)
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? { nil }
 }
